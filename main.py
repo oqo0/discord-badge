@@ -45,7 +45,7 @@ client = Badge(intents = Intents.none())
 # активация бота
 @client.event
 async def on_ready():
-    print(ConsoleColors.Success + f"Бот успешно активирован." + ConsoleColors.Reset)
+    print(ConsoleColors.Success + "Бот успешно активирован." + ConsoleColors.Reset)
     print(f"{client.user} | {client.user.id}")
     print(" ")
     print(f"Ссылка для приглашения бота на сервер:")
@@ -83,6 +83,9 @@ async def getbadge(interaction: Interaction):
         "",
         "Если этот бот был полезен для вас, пожалуйста, поставьте звёзду репозиторию с ботом.",
     ]))
+    
+    print(ConsoleColors.Success + "Чтобы забрать значок заполните форму по ссылке: https://discord.com/developers/active-developer")
+    print("Получение доступа к форме занимает до 24 часов." + ConsoleColors.Reset)
     
     await interaction.client.close()
     await interaction.client.clear()
