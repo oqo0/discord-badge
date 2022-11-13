@@ -2,6 +2,13 @@ import os
 import requests
 from discord import app_commands, Intents, Client, Interaction
 
+# цветовые коды
+class ConsoleColors:
+    Success = '\033[92m'
+    Warning = '\033[93m'
+    Error = '\033[91m'
+    Reset = '\033[0m'
+
 # Проверка на корректность введённого токена
 def CheckTokenValidity(token: str) -> dict:
     response = requests.get("https://discord.com/api/v10/users/@me", headers = {"Authorization": f"Bot {token}"})
@@ -17,9 +24,10 @@ while True:
         break
 
     print("")
-    print("Вы ввели некорректный токен.")
+    print(ConsoleColors.Warning + "Вы ввели некорректный токен." + ConsoleColors.Reset)
 
 print("")
+print(ConsoleColors.Success + "Введён валидный токен." + ConsoleColors.Reset)
 print("Не закрывайте программу...")
 print("")
 
@@ -37,12 +45,26 @@ client = Badge(intents = Intents.none())
 # активация бота
 @client.event
 async def on_ready():
-    print(f"Бот активирован.")
+    print(ConsoleColors.Success + f"Бот успешно активирован." + ConsoleColors.Reset)
     print(f"{client.user} | {client.user.id}")
     print(" ")
     print(f"Ссылка для приглашения бота на сервер:")
     print(f"> https://discord.com/api/oauth2/authorize?client_id={client.user.id}&scope=applications.commands%20bot")
     print(" ")
+
+# ошибка при выполнении
+@client.event
+async def on_error():
+    print(ConsoleColors.Error + "Во время выполнения произошла ошибка.")
+    print("Возможные причины проблемы:")
+    print(" - Отсутствие подключения к интернету.")
+    print(" - Нестабильное подключение к интернету.")
+    print(" - Проблемы на серверах Discord.")
+    print(" - Некорректная версия Discord.py или Requests.")
+    print(ConsoleColors.Reset)
+    print("Если вы не смогли решить проблему, откройте issue в репозитории бота: https://github.com/oqo0/discord-badge")
+
+    os._exit(0)
 
 # глобальная команда /getbadge
 @client.tree.command()
