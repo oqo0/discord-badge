@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="10%" height="10%" src="media/logo.png" href="https://github.com/oqo0/discord-badge">
+  <img width="8%" height="8%" src="media/logo.png" href="https://github.com/oqo0/discord-badge">
   <br>
 </p>
 <p align="center">
